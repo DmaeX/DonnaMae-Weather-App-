@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+
+<body>
+  <video autoplay muted loop id="myVideo">
+    <source src="/static/clouds.mp4" type="video/mp4">
+  </video>
+
+  <div class="container">
+    <h1>My Personal Weather App</h1>
+    <input type="text" id="city" placeholder="Enter city name" />
+    <button onclick="searchCity()" id="getWeather">Get Weather</button>
+
+    <div id="weatherResult" class="result">
+  </div>
+
+  <div class="container">
+    <p style="color:darkgray; text-transform: uppercase;">My Location</p>
+    <h2 style="font-size: 30px; margin: 0; text-transform: capitalize;">{{ city_name }}</h2>
+    <h1 style="font-size: 70px; margin:0; color:#4e54c8;">{{ temp_fahrenheit }}°F</h1>
+    <p style="color: darkgray; margin:0; text-transform: uppercase;"> {{ description }}</p>
+    <h3>Feels like: {{ temp_fahrenheit }}°F</h3>
+    <p>Wind Speed: {{ wind_speed }} m/s</p>
+    <p>Humidity: {{  humidity }}%</p>
+    <p>Sun <img src="/static/sunrise.png" style="width:30px;"> at {{ sunrise_time }} </p>
+    <p>Sun <img src="/static/sunset.png" style="width:30px;"> at {{ sunrise_set }} </p>
+  <br>
+  </div>
+
+  <script>
+    function searchCity(){
+      const input = document.getElementById("city")
+      const city = input.value.trim()
+      if (city.length === 0){
+        alert("Um, you're missing something... Enter a city")
+        return 
+      }
+      document.location.href = "/weather/" + encodeURI(city)
+    }
+  </script>
+  
+</body>
+</html>
